@@ -30,18 +30,18 @@ model Server {
   id         String @id @default(uuid())
   name       String
   imageUrl   String @db.Text
-  invitecode String @db.Text
+  invitecode String @unique
 
-  profilId String
-  profile  Profile @relation(fields: [profilId], references: [id], onDelete: Cascade)
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
-  memebers Member[]
+  members  Member[]
   channels Channel[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([profilId])
+  @@index([profileId])
 }
 
 enum MemberRole {
@@ -81,12 +81,12 @@ model Channel {
   profileId String
   profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
-  serevrId String
-  server   Server @relation(fields: [serevrId], references: [id], onDelete: Cascade)
+  serverId String
+  server   Server @relation(fields: [serverId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([serevrId])
+  @@index([serverId])
   @@index([profileId])
 }

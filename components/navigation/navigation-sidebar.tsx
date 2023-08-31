@@ -18,7 +18,7 @@ export const NavigationSidebar = async () => {
 
     const servers = await db.server.findMany({
         where: {
-            memebers: {
+            members: {
                 some: {
                     profileId: profile.id
                 }
