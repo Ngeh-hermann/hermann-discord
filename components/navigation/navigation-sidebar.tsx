@@ -5,7 +5,7 @@ import { db } from "@/lib/db"
 import { NaviagtionAction } from "./navigation-action";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { NaviagtionItem } from "./navigation-item";
+import { NavigationItem } from "./navigation-item";
 import { ModeToggle } from "@/components/mode-toggle";
 import { UserButton } from "@clerk/nextjs";
 
@@ -35,7 +35,7 @@ export const NavigationSidebar = async () => {
             <ScrollArea className="flex-1 w-full">
                 {servers.map((server) => (
                     <div key={server.id} className="mb-4">
-                        <NaviagtionItem 
+                        <NavigationItem 
                             id={server.id}
                             name={server.name}
                             imageUrl={server.imageUrl}
