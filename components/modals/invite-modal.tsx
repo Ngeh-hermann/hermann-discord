@@ -17,6 +17,7 @@ import { useOrigin } from "@/hooks/use-origin";
 import { useState } from "react";
 import { setLazyProp } from "next/dist/server/api-utils";
 import axios from "axios";
+import { cn } from "@/lib/utils";
 
 export const InviteModal = () => {
   const { onOpen, isOpen, onClose, type, data } = useModal();
@@ -87,7 +88,9 @@ export const InviteModal = () => {
             className="text-xs text-zinc-500 mt-4"
           >
             Generate a new Link
-            <RefreshCw className="w-4 h-4 ml-4" />
+            <RefreshCw
+              className={cn("w-4 h-4 ml-4", isLoading && "animate-spin")}
+            />
           </Button>
         </div>
       </DialogContent>
