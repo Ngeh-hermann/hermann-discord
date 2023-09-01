@@ -1,56 +1,51 @@
 "use client";
 
-import { X } from "lucide-react"
-import Image from "next/image"
+import { X } from "lucide-react";
+import Image from "next/image";
 
 import { UploadDropzone } from "@/lib/uploadthing";
-import "@uploadthing/react/styles.css"
+import "@uploadthing/react/styles.css";
 
 interface FileUploadProps {
-    onChange: (url?: string) => void;
-    value: string;
-    endpoint: "messageFile" | "serverImage";
+  onChange: (url?: string) => void;
+  value: string;
+  endpoint: "messageFile" | "serverImage";
 }
 
-export const FileUpload = ({
-    onChange,
-    value,
-    endpoint
-}: FileUploadProps) => {
+export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
+  const filetype = value.split(".").pop();
 
-    const filetype = value.split(".").pop();
-
-    if (value && filetype !== "pdf"){
-        return (
-            <div className="relative h-20 w-20">
-                {/* TODO: Add a skeleton loading image (chack shadcn) */}
-                <Image 
-                    fill
-                    src={value}
-                    alt="upload"
-                    className="rounded-full"
-                />
-                <button
-                    onClick={() => onChange("")}
-                    className="bg-rose-500 text-white p-1 rounded-full absolute top-0 right-0 shadow-sm"
-                    type="button"
-                >
-                    <X className="h-4 w-4" />
-                </button>
-            </div>
-        )
-    }
-
+  if (value && filetype !== "pdf") {
     return (
-        <UploadDropzone
-            endpoint={endpoint}
-            onClientUploadComplete={(res) => {
-                onChange(res?.[0].url)
-            }}
-            onUploadError={(error: Error) => {
-                console.log(error);
-                
-            }}
+      <div className="relative h-20 w-20">
+        {/* TODO: Add a skeleton loading image (chack shadcn) */}
+        <Image
+          fill
+          sizes="10"
+          src={value}
+          alt="upload"
+          className="rounded-full"
         />
-    )
-}
+        <button
+          onClick={() => onChange("")}
+          className="bg-rose-500 text-white p-1 rounded-full absolute top-0 right-0 shadow-sm"
+          type="button"
+        >
+          <X className="h-4 w-4" />
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <UploadDropzone
+      endpoint={endpoint}
+      onClientUploadComplete={(res) => {
+        onChange(res?.[0].url);
+      }}
+      onUploadError={(error: Error) => {
+        console.log(error);
+      }}
+    />
+  );
+};

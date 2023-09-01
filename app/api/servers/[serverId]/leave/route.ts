@@ -17,7 +17,7 @@ export async function PATCH(
             return new NextResponse("Server ID missing", {status: 400})
         }
 
-        const server = await db.server.update({
+        const leaveServer = await db.server.update({
             where: {
                 id: params.serverId,
                 profileId: {
@@ -38,7 +38,7 @@ export async function PATCH(
             }
         })
 
-        return NextResponse.json(server);
+        return NextResponse.json(leaveServer);
     } catch (error) {
         console.log("SERVER_ID_LEAVE", error);
         return new NextResponse("Internal error", {status: 500})     

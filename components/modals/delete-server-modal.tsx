@@ -32,6 +32,7 @@ export const DeleteServerModal = () => {
       onClose();
       router.refresh();
       router.push("/");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     } finally {
@@ -51,7 +52,7 @@ export const DeleteServerModal = () => {
             <span className="font-semibold text-indigo-500">
               {server?.name}
             </span>{" "}
-            will be permenantly deleted. ?
+            will be permenantly deleted.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="bg-gray-100 px-6 py-4">

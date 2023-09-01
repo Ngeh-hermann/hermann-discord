@@ -1,6 +1,5 @@
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
-import { redirectToSignIn } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 export async function PATCH(
@@ -15,7 +14,7 @@ export async function PATCH(
             return new NextResponse("Unauthorized", {status: 401})
         }
 
-        const server = await db.server.update({
+        const editServer = await db.server.update({
             where: {
                 id: params.serverId,
                 profileId: profile.id
@@ -26,7 +25,7 @@ export async function PATCH(
             }
         });
 
-        return NextResponse.json(server);
+        return NextResponse.json(editServer);
 
 
     } catch (error) {
@@ -46,14 +45,14 @@ export async function DELETE(
             return new NextResponse("Unauthorized", {status: 401})
         }
 
-        const server = await db.server.delete({
+        const delteServer = await db.server.delete({
             where: {
                 id: params.serverId,
                 profileId: profile.id
             }
         });
 
-        return NextResponse.json(server);
+        return NextResponse.json(delteServer);
 
 
     } catch (error) {

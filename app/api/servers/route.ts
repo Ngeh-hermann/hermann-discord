@@ -15,7 +15,7 @@ export async function POST(req: Request) {
             return new NextResponse("Unauthorized", {status: 401});
         }        
 
-        const server = await db.server.create({
+        const createServer = await db.server.create({
             data: {
                 profileId: profile.id,
                 name,
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
             }
         })
 
-        return NextResponse.json(server);
+        return NextResponse.json(createServer);
 
     } catch (error) {
         console.log("[SERVER_POST]", error );
